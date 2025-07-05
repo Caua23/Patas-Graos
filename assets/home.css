@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #f0ede7;
+  --secondary-color: #7a7670;
+  --tertiary-color: #a59f98;
+  --quaternary-color: #c1bab2;
+  --text-color: #201f1d;
+}
+body{
+    height: 100vh;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    
+}
+main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.backgroundF{
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-position: center 0px;
+    background-repeat: no-repeat;
+    background-image: url('../assets/img/homeFundo.png');
+    filter: blur(3px);
+    background-size: cover;
+    position: fixed;
+}
+main .main-text{
+    gap: 10px;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+main .main-text h1{
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+main .main-text p{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+main .main-text button:first-child{
+    height: 38px;
+    width: 180px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid#ffffff ;
+    background: none;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+
+main .main-text button:first-child:hover{
+    background-color: var(--quaternary-color);
+    color: var(--text-color);
+    border: 1px solid var(--quaternary-color);
+    transition: 0.5s ease-in-out;
+}
+
+
+main .main-text button:last-of-type{
+    height: 38px;
+    width: 180px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    background: #472B16;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+
+main .main-text button:last-of-type:hover{
+    background-color:  #22150a;
+    color: #ffffff;
+    transition: 0.5s ease-in-out;
+}
