@@ -11,10 +11,18 @@ if ($route == '' || $route == false) {
 
 switch ($route) {
     case '/':
-        echo 'Home';
+        require __DIR__ . '/../app/controllers/HomeController.php';
         break;
-    
+    case '/sobre':
+        require __DIR__ . '/../app/controllers/AboutController.php';
+        break;
+    case '/catalogo':
+        require __DIR__ . '/../app/controllers/CatalogController.php';
+        break;
+    case '/carrinho':
+        require __DIR__ . '/../app/controllers/CartController.php';
+        break;
     default:
-        echo '404 Not Found';
+        require __DIR__ . '/../app/views/NotFound.php';
         break;
 }
