@@ -34,6 +34,9 @@ switch ($route) {
     case '/carrinho':
         require __DIR__ . '/../app/controllers/CartController.php';
         break;
+    case '/login':
+        require __DIR__ . '/../app/controllers/LoginController.php';
+        break;
     default:
         require __DIR__ . '/../app/views/NotFound.php';
         break;

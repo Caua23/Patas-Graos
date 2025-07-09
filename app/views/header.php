@@ -19,6 +19,9 @@
             <li>
                 <a href="<?php echo $basePath; ?>/carrinho">Carrinho</a>
             </li>
+            <li>
+                <a href="<?php echo $basePath; ?>/login">Fazer login</a>
+            </li>
         </ul>
     </div>
 </header>
