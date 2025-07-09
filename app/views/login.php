@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faça login</title>
-    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/login.css">
+    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/css/login.css">
    <link rel="shortcut icon" href="<?php echo $basePath; ?>/assets/img/logo.jpeg" type="image/x-icon">
 </head>
 <body>

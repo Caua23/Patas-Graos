@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo</title>
-    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/catalogo.css">
-    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/header.css">
+    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/css/catalogo.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/css/header.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="<?php echo $basePath; ?>/assets/img/logo.jpeg" type="image/x-icon">
 </head>
 
@@ -21,19 +21,19 @@
                 $type = $_GET['type'] ?? null;
                 switch ($type) {
                     case 'destaques':
-                        echo '<h1>Destaques</h1>';
+                        require __DIR__ . '/components/catalogoComponents/destaques.php';
                         break;
                     case 'bebidas':
-                        echo '<h1>Bebidas</h1>';
+                        require __DIR__ . '/components/catalogoComponents/bebidas.php';
                         break;
                     case 'salgados':
-                        echo '<h1>Salgados</h1>';
+                        require __DIR__ . '/components/catalogoComponents/salgados.php';
                         break;
                     case 'doces':
-                        echo '<h1>Doces</h1>';
+                        require __DIR__ . '/components/catalogoComponents/doces.php';
                         break;
                     case 'jardim_felino':
-                        echo '<h1>Jardim Felino</h1>';
+                        require __DIR__ . '/components/catalogoComponents/jardim.php';
                         break;
                     default:
                         echo '<script>
@@ -49,7 +49,7 @@
         </main>
     </div>
 
-    <script src="<?php echo $basePath; ?>/assets/catalogo.js"></script>
+    <script src="<?php echo $basePath; ?>/assets/js/catalogo.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>

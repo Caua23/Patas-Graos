@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/header.css">
-    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/about.css">
+    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/css/header.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/css/about.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="<?php echo $basePath; ?>/assets/img/logo.jpeg" type="image/x-icon">
 
     <title>Sobre nós</title>
