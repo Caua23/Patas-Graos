@@ -82,3 +82,9 @@ aside ul li:hover {
 main{
     width: 100%;
 }
+
+svg{
+    width: 40px;
+    height: 40px;
+    color: #ffffff;
+}

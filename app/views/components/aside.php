@@ -1,35 +1,33 @@
-<?php
 
-?>
 <aside>
     <ul>
         <li onclick="location.href='<?php echo $basePath; ?>/catalogo?type=destaques'">
-            <button >
-                <img src="<?php echo $basePath; ?>/assets/img/destaques.jpeg"  alt="">
+            <button>
+                <i data-lucide="star"> </i>
                 <span>Destaques</span>
             </button>
         </li>
         <li onclick="location.href='<?php echo $basePath; ?>/catalogo?type=bebidas'">
-            <button >
-                <img src="<?php echo $basePath; ?>/assets/img/bebidas.jpeg" alt="">
+            <button>
+                <i data-lucide="coffee"> </i>
                 <span>Bebidas</span>
             </button>
         </li>
         <li onclick="location.href='<?php echo $basePath; ?>/catalogo?type=salgados'">
-            <button >
-                <img src="<?php echo $basePath; ?>/assets/img/salgados.jpeg" alt="">
+            <button>
+                <i data-lucide="croissant"> </i>
                 <span>Salgados</span>
             </button>
         </li>
         <li onclick="location.href='<?php echo $basePath; ?>/catalogo?type=doces'">
-            <button >
-                <img src="<?php echo $basePath; ?>/assets/img/doces.jpeg" alt="">
+            <button>
+                <i data-lucide="cake-slice"> </i>
                 <span>Doces</span>
             </button>
         </li>
         <li onclick="location.href='<?php echo $basePath; ?>/catalogo?type=jardim_felino'">
-            <button >
-                <img src="<?php echo $basePath; ?>/assets/img/jardim.jpeg" alt="">
+            <button>
+                <i data-lucide="cat"> </i>
                 <span>Jardim Felino</span>
             </button>
         </li>
@@ -37,4 +35,9 @@
     <div>
         <p>0.1V</p>
     </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </aside>
