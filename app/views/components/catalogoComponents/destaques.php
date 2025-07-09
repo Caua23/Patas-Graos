@@ -43,6 +43,14 @@
             'description' => 'Com cobertura de chocolate',
             'quantity' => 5,
             'image' => 'wafflesChocolate.png'
+        ],
+        [
+            'id' => 232,
+            'name' => 'Chocolate de waffle ',
+            'price' => 'R$ 31,90',
+            'description' => 'Com cobertura de waffles',
+            'quantity' => 553,
+            'image' => 'wafflesChocolate.png'
         ]
     ];
 

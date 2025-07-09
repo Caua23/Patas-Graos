@@ -14,7 +14,7 @@
     <?php require __DIR__ . '/components/header.php'; ?>
 
     <div class="container">
-        <?php require __DIR__ . '/components/Anside.php'; ?>
+        <?php require __DIR__ . '/components/aside.php'; ?>
         <main>
             <div class="catalog-content">
                 <?php
