@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patas&Grãos</title>
-    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/home.css">
-    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/header.css">
+    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/css/home.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/css/header.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="<?php echo $basePath; ?>/assets/img/logo.jpeg" type="image/x-icon">
 </head>
 <body>
