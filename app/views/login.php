@@ -12,7 +12,7 @@
         <div class="loginBackgroundf"></div>
     <form action="./">
         <div class="title">
-            <h1>🐾Identifique-se para os gatinhos🐾</h1>
+            <h1>🐾Se identifique para os gatinhos🐾</h1>
             <h3> Bem-vindo ao Patas e Grãos!</h3>
         </div>
         <div Class="inputs">

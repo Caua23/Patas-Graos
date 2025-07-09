@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    padding-block: 0;
     box-sizing: border-box;
 }
 
@@ -45,28 +46,32 @@ form{
     z-index: 3;
     display: flex;
     flex-direction: column;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     padding: 12vh 40px;
-    border-radius: 4px;
+    border-radius: 30px;
 }
 
 input[type=email], [type=password] {
     width: 100%;
-    padding: 12px 20px;
+    padding: 17px 10px 13px;
     box-sizing: border-box;
-    
+    border-radius: 15px;
+    border: none;
 }
 
 input[type=submit] {
     width: 100%;
-    padding: 11px 15px;
+    padding: 14px 15px ;
     font-size: 20pt;
-    background-color: var(--secondary-color);
-    color: #f0ede7;
+    background-color: var(--text-color);
+    color: #c1bab2;
+    border-radius: 15px;
+    border: none;
 }
 
 input::placeholder{
     font-size: 15pt;
+    text-align: left;
 }
 
 .inputs {
@@ -75,7 +80,7 @@ input::placeholder{
     gap: 10px;
     background-color:var(--tertiary-color) ;
     padding: 45px 20px;
-    border-radius: 4px;
+    border-radius: 25px;
 }
 
 .title {
