@@ -18,7 +18,8 @@
         <main>
             <div class="catalog-content">
                 <?php
-                switch ($_GET['type'] ?? null) {
+                $type = $_GET['type'] ?? null;
+                switch ($type) {
                     case 'destaques':
                         echo '<h1>Destaques</h1>';
                         break;
@@ -35,13 +36,16 @@
                         echo '<h1>Jardim Felino</h1>';
                         break;
                     default:
-                        echo '<script>history.back();</script>';
-                    exit;
+                        echo '<script>
+                            if (!(window.location.pathname === "' . $basePath . '/catalogo" && window.location.search === "?type=destaques")) {
+                                window.location.href = "' . $basePath . '/catalogo?type=destaques";
+                            }
+                        </script>';
+                        break;
+
                 }
                 ?>
-
             </div>
-
         </main>
     </div>
 
