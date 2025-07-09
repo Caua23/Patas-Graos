@@ -29,7 +29,7 @@ switch ($route) {
         require __DIR__ . '/../app/controllers/AboutController.php';
         break;
     case '/catalogo':
-        require __DIR__ . '/../app/controllers/CatalogController.php';
+        require __DIR__ . '/../app/controllers/CatalogoController.php';
         break;
     case '/carrinho':
         require __DIR__ . '/../app/controllers/CartController.php';

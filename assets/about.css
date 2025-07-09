@@ -55,6 +55,7 @@ main .main-content{
     align-items: center;
     justify-content: center;
     color: var(--text-color);
+    text-align: justify;
     margin: 154px 30vh 0 35vh;
     padding: 0 7vh 0 1vh;
     background-color: var(--quaternary-color);
