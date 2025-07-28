@@ -1,20 +1,43 @@
 <?php
 
-$basePath = dirname($_SERVER['SCRIPT_NAME']);
-$route = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-if (strpos($route, $basePath) === 0) {
-    $route = substr($route, strlen($basePath));
+$scriptName = $_SERVER['SCRIPT_NAME'];
+$requestUri = $_SERVER['REQUEST_URI'];
+
+
+$basePath = str_replace('/index.php', '', $scriptName);
+$path = parse_url($requestUri, PHP_URL_PATH);
+
+
+if (strpos(strtolower($path), strtolower($basePath)) === 0) {
+    $route = substr($path, strlen($basePath));
+} else {
+    $route = $path;
 }
-if ($route == '' || $route == false) {
+
+$route = rtrim($route, '/');
+if ($route === '') {
     $route = '/';
 }
 
+
+
 switch ($route) {
     case '/':
-        echo 'Home';
+        require __DIR__ . '/../app/controllers/HomeController.php';
         break;
-    
+    case '/sobre':
+        require __DIR__ . '/../app/controllers/AboutController.php';
+        break;
+    case '/catalogo':
+        require __DIR__ . '/../app/controllers/CatalogoController.php';
+        break;
+    case '/carrinho':
+        require __DIR__ . '/../app/controllers/CartController.php';
+        break;
+    case '/login':
+        require __DIR__ . '/../app/controllers/LoginController.php';
+        break;
     default:
-        echo '404 Not Found';
+        require __DIR__ . '/../app/views/NotFound.php';
         break;
 }
