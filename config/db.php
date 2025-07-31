@@ -3,6 +3,10 @@
 class Database
 {
     private $connection;
+    public function getConnection(): PDO
+    {
+        return $this->connection;
+    }
 
     public function __construct()
     {
