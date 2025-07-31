@@ -37,6 +37,13 @@ switch ($route) {
     case '/login':
         require __DIR__ . '/../app/controllers/LoginController.php';
         break;
+    case '/api/login':
+        $AuthController = require __DIR__ . '/../app/controllers/AuthController.php';
+        $AuthController->login(
+            $_POST['email'] ?? '',
+            $_POST['password'] ?? ''
+        );
+        break;
     default:
         require __DIR__ . '/../app/views/NotFound.php';
         break;
