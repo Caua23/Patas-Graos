@@ -37,6 +37,9 @@ switch ($route) {
     case '/login':
         require __DIR__ . '/../app/controllers/LoginController.php';
         break;
+    case '/admin':
+        require __DIR__ . '/../app/controllers/AdminController.php';
+        break;
     default:
         require __DIR__ . '/../app/views/NotFound.php';
         break;
