@@ -40,6 +40,11 @@ switch ($route) {
     case '/login':
         require __DIR__ . '/../app/controllers/LoginController.php';
         break;
+
+    case '/admin':
+        require __DIR__ . '/../app/controllers/AdminController.php';
+        break;
+    
     case '/api/login':
         $AuthController = require __DIR__ . '/../app/controllers/AuthController.php';
         $AuthController->login(
@@ -47,13 +52,16 @@ switch ($route) {
             $_POST['password'] ?? ''
         );
         break;
+    
     case '/api/products/getAll':
         $ProductController = require __DIR__ . '/../app/controllers/ProductController.php';
         return $ProductController->getAllProdutcs();
+    
     case '/api/products/get/{id}':
         $ProductController = require __DIR__ . '/../app/controllers/ProductController.php';
         $id = $_GET['id'] ?? null;
         return $ProductController->getProductById($id);
+    
     case '/api/products/create':
         $ProductController = require __DIR__ . '/../app/controllers/ProductController.php';
         $ProductController->createProduct(
