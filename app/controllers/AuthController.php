@@ -22,14 +22,14 @@ class AuthController
             return json_encode(['error' => 'Preencha todos os campos.']);
         }
 
-        $stmt = $this->db->prepare("INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, :role)");
+        $stmt = $this->db->prepare("INSERT INTO Adm (name, email, password, role) VALUES (:name, :email, :password, :role)");
         $stmt->execute([
             'name' => $name,
             'email' => $email,
             'password' => password_hash($password, PASSWORD_DEFAULT),
             'role' => $role
         ]);
-
+        
         return json_encode(
             [
                 'success' => 'Usuário criado com sucesso.',
