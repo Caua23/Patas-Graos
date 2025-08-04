@@ -1,5 +1,12 @@
 <?php
-// Exemplo de array de produtos no carrinho
+$scriptName = $_SERVER['SCRIPT_NAME'];
+$basePath = str_replace('/index.php', '', $scriptName);
+
+$url = "http://localhost" . $basePath . "/api/cart/getAll";
+
+$dadosJson = file_get_contents($url);
+$carrinho = json_decode($dadosJson, true);
+
 $carrinho = [
     ['nome' => 'Produto A', 'quantidade' => 2, 'valor' => 49.90],
     ['nome' => 'Produto B', 'quantidade' => 1, 'valor' => 79.90],
