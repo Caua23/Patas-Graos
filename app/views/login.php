@@ -13,18 +13,17 @@
 </head>
 
 <body>
+    
     <main>
 
         <div class="loginBackgroundf"></div>
-        <form action="<?php echo $basePath; ?>/api/login" method="POST">
-            
-            <div class="title">
-                
-                <button class="back-button" onclick="window.history.back()">
-                    <img src="<?php echo $basePath; ?>/assets/img/setaVoltar.png" alt="Voltar">
-                </button>
         
-                <h1>🐾Se identifique para os gatinhos🐾</h1>
+        <form action="<?php echo $basePath; ?>/api/login" method="POST">
+            <a class="back-button" onclick="window.history.back()">
+                <img src="<?php echo $basePath; ?>/assets/img/setaVoltar.png" alt="Voltar">
+            </a>
+            <div class="title">
+                <h1>🐈Se identifique para os gatinhos</h1>
                 <h3> Bem-vindo ao Patas e Grãos!</h3>
             </div>
             <div Class="inputs">
