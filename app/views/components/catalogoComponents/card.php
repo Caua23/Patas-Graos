@@ -1,20 +1,19 @@
 <style>
     .card {
-        border: 1px solid #ccc;
-        border-radius: 8px;
+        border: 2px solid #ccc;
+        border-radius: 25px;
         overflow: hidden;
         margin: 16px;
-        width: 350px;
+        width: 280px;
         height: 400px;
         text-align: center;
         background-color:rgb(39, 0, 75);
         color: white;
-        font: 500 14px 'Arial', sans-serif;
-        
+        font: 600 14px 'Arial', sans-serif;
+        user-select: none;
     }
 
     .card img {
-        border-radius: 10px;
         width: 100%;
         height: 200px;
         margin-bottom: 10px;
@@ -47,7 +46,7 @@
         text-align: justify;
     }
     .add-to-cart{
-        background-color: rgb(47, 0, 255);
+        background-color: rgba(0, 0, 0, 1);
         color: white;
         border: none;
         border-radius: 25px;

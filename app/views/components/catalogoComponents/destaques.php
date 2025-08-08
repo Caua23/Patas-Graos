@@ -1,3 +1,14 @@
+
+<?php
+$basePath = str_replace('/index.php', '', $scriptName);
+
+$url = "http://localhost" . $basePath . "/api/products/getAll";
+
+$dadosJson = file_get_contents($url);
+$produtos = json_decode($dadosJson, true);
+?>
+
+
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
     .destaques{
@@ -51,7 +62,23 @@
             'description' => 'Com cobertura de waffles',
             'quantity' => 553,
             'image' => 'wafflesChocolate.png'
-        ]
+        ],
+        [
+            'id' => 232,
+            'name' => 'Chocolate de waffle ',
+            'price' => 'R$ 31,90',
+            'description' => 'Com cobertura de waffles',
+            'quantity' => 553,
+            'image' => 'wafflesChocolate.png'
+        ],
+        [
+            'id' => 232,
+            'name' => 'Chocolate de waffle ',
+            'price' => 'R$ 31,90',
+            'description' => 'Com cobertura de waffles',
+            'quantity' => 553,
+            'image' => 'wafflesChocolate.png'
+        ],
     ];
 
     foreach ($products as $product) {
