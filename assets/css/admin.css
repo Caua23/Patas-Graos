@@ -80,3 +80,16 @@ svg{
     height: 40px;
     color: #ffffff;
 }
+
+form{
+        color: white;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 15%;
+        padding-top: 134px;
+        font: 500 20px 'Montserrat', sans-serif;
+        border-radius: 0px;
+    }
