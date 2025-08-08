@@ -47,30 +47,49 @@ switch ($route) {
     
     case '/api/login':
         $AuthController = require __DIR__ . '/../app/controllers/AuthController.php';
-        $AuthController->login(
+        echo $AuthController->login(
             $_POST['email'] ?? '',
             $_POST['password'] ?? ''
         );
         break;
-    
+
+    case '/api/create/user':
+        $AuthController = require __DIR__ . '/../app/controllers/AuthController.php';
+        echo $AuthController->createUser(
+            $_POST['name'] ?? '',
+            $_POST['email'] ?? '',
+            $_POST['phone'] ?? '',
+            $_POST['password'] ?? '',
+            $_POST['role'] ?? ''
+        );
+        break;
+
     case '/api/products/getAll':
-        $ProductController = require __DIR__ . '/../app/controllers/ProductController.php';
-        return $ProductController->getAllProdutcs();
+        require_once __DIR__ . '/../app/controllers/ProductController.php';
+        $ProductController = new ProdutoController();
+        echo $ProductController->getAllProdutcs();
+        break;
     
     case '/api/products/get/{id}':
-        $ProductController = require __DIR__ . '/../app/controllers/ProductController.php';
+        require_once __DIR__ . '/../app/controllers/ProductController.php';
+        $ProductController = new ProdutoController();
         $id = $_GET['id'] ?? null;
-        return $ProductController->getProductById($id);
-    
+        echo $ProductController->getProductById($id);
+        break;
+
     case '/api/products/create':
-        $ProductController = require __DIR__ . '/../app/controllers/ProductController.php';
-        $ProductController->createProduct(
+        require_once __DIR__ . '/../app/controllers/ProductController.php';
+        $ProductController = new ProdutoController();
+        echo $ProductController->createProduct(
             $_POST['name'] ?? '',
             $_POST['description'] ?? '',
             (float) ($_POST['price'] ?? 0),
             $_POST['img'] ?? '',
+            $_POST['category'] ?? '',
+            $_POST['amount'] ?? '',
             (int) ($_POST['idAdmin'] ?? 0),
-        );//string $name, string $description, float $price, string $image, int $idAdmin
+
+        );
         break;
 
     default:
