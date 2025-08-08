@@ -40,6 +40,11 @@ switch ($route) {
     case '/login':
         require __DIR__ . '/../app/controllers/LoginController.php';
         break;
+
+    case '/admin':
+        require __DIR__ . '/../app/controllers/AdminController.php';
+        break;
+    
     case '/api/login':
         $AuthController = require __DIR__ . '/../app/controllers/AuthController.php';
         echo $AuthController->login(
@@ -47,6 +52,7 @@ switch ($route) {
             $_POST['password'] ?? ''
         );
         break;
+
     case '/api/create/user':
         $AuthController = require __DIR__ . '/../app/controllers/AuthController.php';
         echo $AuthController->createUser(
@@ -63,12 +69,14 @@ switch ($route) {
         $ProductController = new ProdutoController();
         echo $ProductController->getAllProdutcs();
         break;
+    
     case '/api/products/get/{id}':
         require_once __DIR__ . '/../app/controllers/ProductController.php';
         $ProductController = new ProdutoController();
         $id = $_GET['id'] ?? null;
         echo $ProductController->getProductById($id);
         break;
+
     case '/api/products/create':
         require_once __DIR__ . '/../app/controllers/ProductController.php';
         $ProductController = new ProdutoController();
@@ -81,7 +89,7 @@ switch ($route) {
             $_POST['amount'] ?? '',
             (int) ($_POST['idAdmin'] ?? 0),
 
-        );//string $name, string $description, float $price, string $image, int $idAdmin
+        );
         break;
 
     default:
