@@ -17,19 +17,25 @@ $produtos = json_decode($dadosJson, true);
         background-size: cover;
         background-position: center;
         height: 300px;
-        width: 100%;
+        width: 110%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: start;
         padding-left: 50px;
         font: 500 20px 'Montserrat', sans-serif;
-        border-radius: 30px;
+        border-radius: 0px;
     }
     .destaques p{
         font: 500 16px 'Montserrat', sans-serif;
         margin-top: 10px;
         max-width: 350px;
+    }
+
+    .demo{
+        background-image: url('<?php echo $basePath; ?>/assets/img/fundo.jpg');
+        background-repeat: none;
+        border-radius: 0px;
     }
 </style>
 <div class="destaques">
@@ -56,13 +62,22 @@ $produtos = json_decode($dadosJson, true);
             'image' => 'wafflesChocolate.png'
         ],
         [
-            'id' => 232,
-            'name' => 'Chocolate de waffle ',
-            'price' => 'R$ 31,90',
-            'description' => 'Com cobertura de waffles',
-            'quantity' => 553,
-            'image' => 'wafflesChocolate.png'
+            'id' => 12,
+            'name' => 'Pão de queijo fit ',
+            'price' => 'R$ 21,90',
+            'description' => 'Pão de queijo fit para não engordar',
+            'quantity' => 3,
+            'image' => 'https://www.receiteria.com.br/wp-content/uploads/pao-de-queijo-fit-facil-rotated.jpg'
         ],
+        [
+            'id' => 22,
+            'name' => 'Café gatito ',
+            'price' => 'R$ 73,29',
+            'description' => 'Um Café com leite e com pedaços de chocolate',
+            'quantity' => 90,
+            'image' => 'https://cdn.shopify.com/s/files/1/1867/9411/files/Cafe_com_chocolate_2_600x600.jpg?v=1708455061'
+        ],
+        /*
         [
             'id' => 232,
             'name' => 'Chocolate de waffle ',
@@ -70,15 +85,7 @@ $produtos = json_decode($dadosJson, true);
             'description' => 'Com cobertura de waffles',
             'quantity' => 553,
             'image' => 'wafflesChocolate.png'
-        ],
-        [
-            'id' => 232,
-            'name' => 'Chocolate de waffle ',
-            'price' => 'R$ 31,90',
-            'description' => 'Com cobertura de waffles',
-            'quantity' => 553,
-            'image' => 'wafflesChocolate.png'
-        ],
+        ],*/
     ];
 
     foreach ($products as $product) {
