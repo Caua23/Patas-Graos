@@ -93,6 +93,88 @@ class ProdutoController
             return json_encode(['error' => 'Erro ao criar produto.', 'message' => $e->getMessage()]);
         }
     }
+
+    public function deleteProduct(int $id)
+    {
+        header('Content-Type: application/json');
+        try {
+            if ($id <= 0) {
+                http_response_code(400);
+                return json_encode(['error' => 'ID inválido.']);
+            }
+
+            $query = $this->db->prepare('DELETE FROM produtos WHERE id = :id');
+            $query->bindParam(':id', $id, PDO::PARAM_INT);
+            if ($query->execute()) {
+                http_response_code(200);
+                return json_encode(['success' => 'Produto deletado com sucesso.']);
+            } else {
+                http_response_code(404);
+                return json_encode(['error' => 'Produto não encontrado.']);
+            }
+        } catch (PDOException $e) {
+            http_response_code(500);
+            return json_encode(['error' => 'Erro ao deletar produto.', 'message' => $e->getMessage()]);
+        }
+    }
+    public function updateProduct(
+        int $id,
+        string $name,
+        string $description,
+        float $price,
+        string $img,
+        string $category,
+        string $amount
+    ) {
+        header('Content-Type: application/json');
+
+        try {
+            if ($id <= 0) {
+                http_response_code(400);
+                return json_encode(['error' => 'ID inválido.']);
+            }
+
+            $stmt = $this->db->prepare('SELECT * FROM produtos WHERE id = :id');
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $products = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$products) {
+                http_response_code(404);
+                return json_encode(['error' => 'Produto não encontrado.']);
+            }
+            $name = trim($name) === '' ? $products['name'] : $name;
+            $description = trim($description) === '' ? $products['description'] : $description;
+            $price = ($price <= 0) ? (float) $products['price'] : $price;
+            $img = trim($img) === '' ? $products['img'] : $img;
+            $category = trim($category) === '' ? $products['category'] : $category;
+            $amount = trim($amount) === '' ? $products['amount'] : $amount;
+
+            $updateStmt = $this->db->prepare(
+                'UPDATE produtos SET name = :name, description = :description, price = :price, img = :img, category = :category, amount = :amount WHERE id = :id'
+            );
+
+            $updateStmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $updateStmt->bindValue(':name', $name, PDO::PARAM_STR);
+            $updateStmt->bindValue(':description', $description, PDO::PARAM_STR);
+            $updateStmt->bindValue(':price', $price);
+            $updateStmt->bindValue(':img', $img, PDO::PARAM_STR);
+            $updateStmt->bindValue(':category', $category, PDO::PARAM_STR);
+            $updateStmt->bindValue(':amount', $amount, PDO::PARAM_STR);
+            $updateStmt->execute();
+            
+            http_response_code(200);
+            return json_encode(['success' => 'Produto atualizado com sucesso.']);
+
+        } catch (PDOException $e) {
+            http_response_code(500);
+            return json_encode([
+                'error' => 'Erro ao atualizar produto.',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
 }
 
 new ProdutoController();

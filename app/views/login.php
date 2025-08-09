@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -17,8 +15,8 @@
     <main>
 
         <div class="loginBackgroundf"></div>
-        
-        <form action="<?php echo $basePath; ?>/api/login" method="POST">
+        <!--action="<?php echo $basePath; ?>/api/login"-->
+        <form id="form">
             <a class="back-button" onclick="window.history.back()">
                 <img src="<?php echo $basePath; ?>/assets/img/setaVoltar.png" alt="Voltar">
             </a>
@@ -33,7 +31,7 @@
             </div>
         </form>
     </main>
-
+    <script src="<?php echo $basePath; ?>/assets/js/login.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>

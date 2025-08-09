@@ -18,8 +18,45 @@ $route = rtrim($route, '/');
 if ($route === '') {
     $route = '/';
 }
+function getRequestData(): array {
+    if (stripos($_SERVER['CONTENT_TYPE'] ?? '', 'application/json') !== false) {
+        return json_decode(file_get_contents("php://input"), true) ?? [];
+    }
+    return $_POST;
+}
 
+if (preg_match('#^/api/products/delete/(\d+)$#', $route, $matches) && $_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    require_once __DIR__ . '/../app/controllers/ProductController.php';
+    $ProductController = new ProdutoController();
+    $id = $matches[1];
+    echo $ProductController->deleteProduct($id);
+    exit; 
+}
 
+if (preg_match('#^/api/products/get/(\d+)$#', $route, $matches) && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    require_once __DIR__ . '/../app/controllers/ProductController.php';
+    $ProductController = new ProdutoController();
+    $id = $matches[1];
+    echo $ProductController->getProductById($id);
+    exit;
+}
+
+if (preg_match('#^/api/products/update/(\d+)$#', $route, $matches) && $_SERVER['REQUEST_METHOD'] === 'PUT') {
+    require_once __DIR__ . '/../app/controllers/ProductController.php';
+    $ProductController = new ProdutoController();
+    $id = $matches[1];
+    $input = getRequestData();
+    echo $ProductController->updateProduct(
+        $id,
+        $input['name'] ?? '',
+        $input['description'] ?? '',
+        (float) ($input['price'] ?? 0),
+        $input['img'] ?? '',
+        $input['category'] ?? '',
+        $input['amount'] ?? ''
+    );
+    exit;
+}
 
 switch ($route) {
     case '/':
@@ -44,55 +81,52 @@ switch ($route) {
     case '/admin':
         require __DIR__ . '/../app/controllers/AdminController.php';
         break;
-    
+
     case '/api/login':
         $AuthController = require __DIR__ . '/../app/controllers/AuthController.php';
+        $input = getRequestData();
         echo $AuthController->login(
-            $_POST['email'] ?? '',
-            $_POST['password'] ?? ''
+            $input['email'] ?? '',
+            $input['password'] ?? ''
         );
         break;
 
     case '/api/create/user':
         $AuthController = require __DIR__ . '/../app/controllers/AuthController.php';
+
+        $input = getRequestData();
+
         echo $AuthController->createUser(
-            $_POST['name'] ?? '',
-            $_POST['email'] ?? '',
-            $_POST['phone'] ?? '',
-            $_POST['password'] ?? '',
-            $_POST['role'] ?? ''
+            $input['name'] ?? '',
+            $input['email'] ?? '',
+            $input['phone'] ?? '',
+            $input['password'] ?? '',
+            $input['role'] ?? ''
         );
         break;
-
     case '/api/products/getAll':
         require_once __DIR__ . '/../app/controllers/ProductController.php';
         $ProductController = new ProdutoController();
         echo $ProductController->getAllProdutcs();
         break;
-    
-    case '/api/products/get/{id}':
-        require_once __DIR__ . '/../app/controllers/ProductController.php';
-        $ProductController = new ProdutoController();
-        $id = $_GET['id'] ?? null;
-        echo $ProductController->getProductById($id);
-        break;
-
     case '/api/products/create':
         require_once __DIR__ . '/../app/controllers/ProductController.php';
         $ProductController = new ProdutoController();
+        $input = getRequestData();
         echo $ProductController->createProduct(
-            $_POST['name'] ?? '',
-            $_POST['description'] ?? '',
-            (float) ($_POST['price'] ?? 0),
-            $_POST['img'] ?? '',
-            $_POST['category'] ?? '',
-            $_POST['amount'] ?? '',
-            (int) ($_POST['idAdmin'] ?? 0),
+            $input['name'] ?? '',
+            $input['description'] ?? '',
+            (float) ($input['price'] ?? 0),
+            $input['img'] ?? '',
+            $input['category'] ?? '',
+            $input['amount'] ?? '',
+            (int) ($input['idAdmin'] ?? 0),
 
         );
         break;
 
     default:
+        http_response_code(404);
         require __DIR__ . '/../app/views/NotFound.php';
         break;
 }

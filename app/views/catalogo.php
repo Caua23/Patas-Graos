@@ -27,6 +27,7 @@
         height: 200px;
         margin-bottom: 10px;
         object-fit: cover;
+
     }
 
     .card .content {
@@ -39,11 +40,13 @@
     .card .content div:first-child {
         display: flex;
         gap: 15px;
+        margin-bottom: 15px;
         justify-content: center;
         align-items: center;    
     }
     .card .content .description {
         margin-left: 20px;
+        margin-bottom: 10px;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -51,7 +54,7 @@
         align-items: start;
     }
     .card .content .description p{
-        max-width: 180px;
+        max-width: 200px;
         text-align: justify;
     }
     .add-to-cart{
