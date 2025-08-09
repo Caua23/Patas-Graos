@@ -1,11 +1,11 @@
 
 <div class="card" id="<?= $product['id']; ?>">
     <?php
-        if ($product['image']) {
-            $isExternal = preg_match('/^https?:\/\//', $product['image']);
+        if ($product['img']) {
+            $isExternal = preg_match('/^https?:\/\//', $product['img']);
             $imgSrc = $isExternal 
-                ? $product['image'] 
-                : $basePath . '/assets/img/tmp/' . $product['image'];
+                ? $product['img'] 
+                : $basePath . '/assets/img/tmp/' . $product['img'];
         } else {
             $imgSrc = $basePath . '/assets/img/tmp/default.jpg';
         }
@@ -14,11 +14,12 @@
     <div class="content">
         <div>
             <h2><?= $product['name']; ?></h2>
-            <p><?= $product['price']; ?></p>
+            <p>R$ <?= number_format($product['price'], 2, ',', '.'); ?></p>
+
         </div>
         <div class="description">
             <p><?= $product['description']; ?></p>
-            <span><?= $product['quantity']; ?></span>
+            <span><?= $product['amount']; ?> ML/Kg</span>
         </div>
         <div class="actions">
             <button class="add-to-cart">Adicionar ao Carrinho</button>

@@ -19,6 +19,7 @@ class AuthController
         }
 
         if (empty($name) || empty($email) || empty($phone) || empty($password) || empty($role)) {
+            http_response_code(400);
             return json_encode(['error' => 'Preencha todos os campos.']);
         }
 
@@ -55,24 +56,30 @@ class AuthController
 
 
 
-        if (empty($email) || empty($password))
+        if (empty($email) || empty($password)){
+            http_response_code(400);
             return json_encode(['error' => 'Preencha todos os campos.']);
-
+        }
 
         $stmt = $this->db->prepare("SELECT * FROM admin WHERE email = :email LIMIT 1");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user)
+        if (!$user){
+            http_response_code(400);
             return json_encode(['error' => 'Usuário não encontrado.']);
-        if (!password_verify($password, $user['password']))
+        }
+        if (!password_verify($password, $user['password'])){
+            http_response_code(403);
             return json_encode(['error' => 'Senha incorreta.']);
+        }
 
         return json_encode(
             [
                 'success' => 'Login bem-sucedido.',
                 'code' => 200,
                 'token' => 'logado',
+                'redirect' => '/admin',
                 'user' => [
                     'id' => $user['id'],
                     'name' => $user['name'],

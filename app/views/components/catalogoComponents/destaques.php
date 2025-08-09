@@ -5,7 +5,7 @@ $basePath = str_replace('/index.php', '', $scriptName);
 $url = "http://localhost" . $basePath . "/api/products/getAll";
 
 $dadosJson = file_get_contents($url);
-$produtos = json_decode($dadosJson, true);
+$products = json_decode($dadosJson, true);
 ?>
 
 
@@ -37,6 +37,7 @@ $produtos = json_decode($dadosJson, true);
         background-repeat: none;
         border-radius: 0px;
     }
+    
 </style>
 <div class="destaques">
     <h1>Waffles da Casa</h1>
@@ -44,50 +45,7 @@ $produtos = json_decode($dadosJson, true);
 </div>
 <div class="demo">
     <?php
-    $products = [
-        [
-            'id' => 1,
-            'name' => 'Waffle de Morango',
-            'price' => 'R$ 19,90',
-            'description' => 'Com calda de morango',
-            'quantity' => 10,
-            'image' => 'wafflesMorango.png'
-        ],
-        [
-            'id' => 2,
-            'name' => 'Waffle de Chocolate',
-            'price' => 'R$ 21,90',
-            'description' => 'Com cobertura de chocolate',
-            'quantity' => 5,
-            'image' => 'wafflesChocolate.png'
-        ],
-        [
-            'id' => 12,
-            'name' => 'Pão de queijo fit ',
-            'price' => 'R$ 21,90',
-            'description' => 'Pão de queijo fit para não engordar',
-            'quantity' => 3,
-            'image' => 'https://www.receiteria.com.br/wp-content/uploads/pao-de-queijo-fit-facil-rotated.jpg'
-        ],
-        [
-            'id' => 22,
-            'name' => 'Café gatito ',
-            'price' => 'R$ 73,29',
-            'description' => 'Um Café com leite e com pedaços de chocolate',
-            'quantity' => 90,
-            'image' => 'https://cdn.shopify.com/s/files/1/1867/9411/files/Cafe_com_chocolate_2_600x600.jpg?v=1708455061'
-        ],
-        /*
-        [
-            'id' => 232,
-            'name' => 'Chocolate de waffle ',
-            'price' => 'R$ 31,90',
-            'description' => 'Com cobertura de waffles',
-            'quantity' => 553,
-            'image' => 'wafflesChocolate.png'
-        ],*/
-    ];
-
+    
     foreach ($products as $product) {
         require __DIR__ . '/card.php';
     }

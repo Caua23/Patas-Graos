@@ -55,7 +55,7 @@ input[type=email], [type=password] {
     width: 100%;
     padding: 17px 10px 13px;
     box-sizing: border-box;
-    border-radius: 25px;
+    border-radius: 15px;
     border: none;
     outline: none;
     padding-left: 15px;
@@ -70,6 +70,8 @@ input[type=submit] {
     color: #000000;
     border-radius: 15px;
     border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 input::placeholder{
@@ -97,7 +99,9 @@ input:focus {
 }
 
 .back-button{
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     border-radius: 50%;
     margin-bottom: 20px;
