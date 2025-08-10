@@ -6,39 +6,76 @@ aside.style.marginTop = header.offsetHeight + 'px';
 main.style.marginTop = header.offsetHeight + 'px';
 main.style.marginLeft = aside.offsetWidth + 'px';
 
+const pathName = window.location.pathname;
+const projectName = pathName.split("/").filter(Boolean)[0];
+
 async function deleteProduct(id) {
-    const pathName = window.location.pathname; 
-    const projectName = pathName.split("/").filter(Boolean)[0];
     const response = await fetch(`http://localhost/${projectName}/api/products/delete/${id}`, {
         method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' }
     });
+
+    const result = await response.json();
     if (response.ok) {
         location.reload();
     } else {
-        const error = await response.json();
-        alert(`Error: ${error.message}`);
+        alert(`Error: ${result.error}`);
     }
 }
 
 async function updateProduct(id, data) {
-    const pathName = window.location.pathname; 
-    const projectName = pathName.split("/").filter(Boolean)[0];
     const response = await fetch(`http://localhost/${projectName}/api/products/update/${id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     });
+
+    const result = await response.json();
     if (response.ok) {
         location.reload();
     } else {
-        const error = await response.json();
-        alert(`Error: ${error.message}`);
+        alert(`Error: ${result.error}`);
     }
+}
+
+async function createProduct(data) {
+    const response = await fetch(`http://localhost/${projectName}/api/products/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    if (!response.ok) {
+        alert(`Error: ${result.error}`);
+        return;
+    }
+    hiddenProduct();
+    alert(`Produto criado com sucesso!`);
+    console.log("Produto criado:", result);
+}
+function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (let c of cookies) {
+        const [cookieName, cookieValue] = c.split("=");
+        if (cookieName === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+    return null;
+}
+
+
+
+
+function showProduct() {
+    const form = document.querySelector(".addProduct-form");
+    if (form) form.classList.remove("hidden");
+}
+
+function hiddenProduct() {
+    const form = document.querySelector(".addProduct-form");
+    if (form) form.classList.add("hidden");
 }
 
 function hiddenUpdateProduct() {
@@ -56,29 +93,45 @@ function showUpdateProduct(id) {
     form.classList.remove("hidden");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector(".product-form");
-    if (!form) return;
+document.addEventListener("DOMContentLoaded", () => {
+    const addForm = document.querySelector(".addProduct-form");
+    const idAdmin = getCookie("id")
+    if (addForm || idAdmin) {
+        addForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(addForm);
+            const data = {
+                name: formData.get("name"),
+                description: formData.get("description"),
+                price: parseFloat(formData.get("price")) || 0,
+                img: formData.get("img"),
+                category: formData.get("category"),
+                amount: parseInt(formData.get("amount")) || 0,
+                idAdmin: idAdmin
+            };
+            await createProduct(data);
+        });
+    }
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const productId = form.getAttribute("data-product-id");
-        if (!productId) {
-            alert("Produto não selecionado para atualização.");
-            return;
-        }
-
-        const formData = new FormData(form);
-        const data = {
-            name: formData.get("name"),
-            description: formData.get("description"),
-            price: parseFloat(formData.get("price")) || 0,
-            img: formData.get("img"),
-            category: formData.get("category"),
-            amount: parseInt(formData.get("amount")) || 0
-        };
-
-        await updateProduct(productId, data);
-    });
+    const updateForm = document.querySelector(".product-form");
+    if (updateForm) {
+        updateForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const productId = updateForm.getAttribute("data-product-id");
+            if (!productId) {
+                alert("Produto não selecionado para atualização.");
+                return;
+            }
+            const formData = new FormData(updateForm);
+            const data = {
+                name: formData.get("name"),
+                description: formData.get("description"),
+                price: parseFloat(formData.get("price")) || 0,
+                img: formData.get("img"),
+                category: formData.get("category"),
+                amount: parseInt(formData.get("amount")) || 0
+            };
+            await updateProduct(productId, data);
+        });
+    }
 });
