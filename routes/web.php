@@ -18,7 +18,8 @@ $route = rtrim($route, '/');
 if ($route === '') {
     $route = '/';
 }
-function getRequestData(): array {
+function getRequestData(): array
+{
     if (stripos($_SERVER['CONTENT_TYPE'] ?? '', 'application/json') !== false) {
         return json_decode(file_get_contents("php://input"), true) ?? [];
     }
@@ -30,7 +31,7 @@ if (preg_match('#^/api/products/delete/(\d+)$#', $route, $matches) && $_SERVER['
     $ProductController = new ProdutoController();
     $id = $matches[1];
     echo $ProductController->deleteProduct($id);
-    exit; 
+    exit;
 }
 
 if (preg_match('#^/api/products/get/(\d+)$#', $route, $matches) && $_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -44,19 +45,13 @@ if (preg_match('#^/api/products/get/(\d+)$#', $route, $matches) && $_SERVER['REQ
 if (preg_match('#^/api/products/update/(\d+)$#', $route, $matches) && $_SERVER['REQUEST_METHOD'] === 'PUT') {
     require_once __DIR__ . '/../app/controllers/ProductController.php';
     $ProductController = new ProdutoController();
-    $id = $matches[1];
+    $id = (int) $matches[1];
     $input = getRequestData();
-    echo $ProductController->updateProduct(
-        $id,
-        $input['name'] ?? '',
-        $input['description'] ?? '',
-        (float) ($input['price'] ?? 0),
-        $input['img'] ?? '',
-        $input['category'] ?? '',
-        $input['amount'] ?? ''
-    );
+
+    echo $ProductController->updateProduct($id, $input);
     exit;
 }
+
 
 switch ($route) {
     case '/':
@@ -107,7 +102,10 @@ switch ($route) {
     case '/api/products/getAll':
         require_once __DIR__ . '/../app/controllers/ProductController.php';
         $ProductController = new ProdutoController();
-        echo $ProductController->getAllProdutcs();
+        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 10;
+        $category = isset($_GET['category']) ? $_GET['category'] : null;
+
+        echo $ProductController->getAllProducts($limit, $category);
         break;
     case '/api/products/create':
         require_once __DIR__ . '/../app/controllers/ProductController.php';
@@ -124,7 +122,25 @@ switch ($route) {
 
         );
         break;
+    case '/api/carrinho/add':
+        require_once __DIR__ . '/../app/controllers/CartController.php';
+        $cartController = new CartController();
+        $input = getRequestData();
+        echo $cartController->addProduct(
+            [
+                'idProduto' => (int) ($input['idProduto'] ?? 0),
+                'quantidade' => (int) ($input['quantidade'] ?? 0)
+            ]
+        );
+        break;
+    case '/api/carrinho/get':
+        require_once __DIR__ . '/../app/controllers/CartController.php';
+        $cartController = new CartController();
+        echo $cartController->getProductsFromCart(
+            1
+        );
 
+        break;
     default:
         http_response_code(404);
         require __DIR__ . '/../app/views/NotFound.php';

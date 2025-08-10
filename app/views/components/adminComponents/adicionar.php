@@ -29,7 +29,13 @@
 
             <div class="form-group">
                 <label for="category">Categoria:</label>
-                <input type="text" id="category" name="category" required>
+                <select id="category" name="category" required>
+                    <option value="DESTAQUES">DESTAQUES</option>
+                    <option value="BEBIDAS">BEBIDAS</option>
+                    <option value="SALGADOS">SALGADOS</option>
+                    <option value="DOCES">DOCES</option>
+                    <option value="JARDIMFELINO">JARDIM FELINO</option>
+                </select>
             </div>
 
             <div class="form-group">
