@@ -29,27 +29,27 @@ $products = json_decode($dadosJson, true);
 
                 <div class="form-group">
                     <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" >
                 </div>
 
                 <div class="form-group">
                     <label for="price">Preço (R$):</label>
-                    <input type="number" step="0.01" min="0" id="price" name="price" required>
+                    <input type="number" step="0.01" min="0" id="price" name="price" >
                 </div>
 
                 <div class="form-group">
                     <label for="category">Categoria:</label>
-                    <input type="text" id="category" name="category" required>
+                    <input type="text" id="category" name="category" >
                 </div>
 
                 <div class="form-group">
                     <label for="amount">Quantidade:</label>
-                    <input type="number" min="0" id="amount" name="amount" required>
+                    <input type="number" min="0" id="amount" name="amount" >
                 </div>
 
                 <div class="form-group full-width">
                     <label for="description">Descrição:</label>
-                    <textarea id="description" name="description" required></textarea>
+                    <textarea id="description" name="description" ></textarea>
                 </div>
 
                 <div class="form-group full-width">
