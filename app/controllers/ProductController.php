@@ -64,7 +64,19 @@ class ProdutoController
         try {
             if (empty($name) || empty($description) || $price <= 0 || empty($price) || empty($amount) || empty($category) || empty($img) || $idAdmin <= 0 || !is_numeric($price)) {
                 http_response_code(400);
-                return json_encode(['error' => 'Dados inválidos verifique novamente.']);
+                return json_encode([
+                    'error' => 'Dados inválidos verifique novamente.',
+                    [
+                        'name' => $name,
+                        'description' => $description,
+                        'price' => $price,
+                        'amount' => $amount,
+                        'category' => $category,
+                        'id_adm' => $idAdmin,
+                        'img' => $img,
+
+                    ]
+                ]);
             }
             $adminCheck = $this->db->prepare('SELECT * FROM admin WHERE id = :id');
             $adminCheck->bindParam(':id', $idAdmin, PDO::PARAM_INT);
@@ -151,8 +163,12 @@ class ProdutoController
             $description = isset($data['description']) && trim($data['description']) !== '' ? $data['description'] : $products['description'];
             $price = isset($data['price']) && $data['price'] > 0 ? (float) $data['price'] : (float) $products['price'];
             $img = isset($data['img']) && trim($data['img']) !== '' ? $data['img'] : $products['img'];
-            $category = isset($data['category']) && trim($data['category']) !== '' ? $data['category'] : $products['category'];
-            $amount = isset($data['amount']) && trim($data['amount']) !== '' ? (int) $data['amount'] : (int) $products['amount'];
+            $category = (
+                isset($data['category'])
+                && trim($data['category']) !== ''
+                && trim($data['category']) !== 'Selecione uma categoria'
+            ) ? $data['category'] : $products['category'];
+            $amount = isset($data['amount']) && trim($data['amount']) !== '' ? $data['amount'] : $products['amount'];
 
             $updateStmt = $this->db->prepare(
                 'UPDATE produtos SET name = :name, description = :description, price = :price, img = :img, category = :category, amount = :amount WHERE id = :id'
@@ -164,7 +180,7 @@ class ProdutoController
             $updateStmt->bindValue(':price', $price);
             $updateStmt->bindValue(':img', $img, PDO::PARAM_STR);
             $updateStmt->bindValue(':category', $category, PDO::PARAM_STR);
-            $updateStmt->bindValue(':amount', $amount, PDO::PARAM_INT);
+            $updateStmt->bindValue(':amount', $amount, PDO::PARAM_STR);
             $updateStmt->execute();
 
             http_response_code(200);

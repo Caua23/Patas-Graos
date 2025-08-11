@@ -29,11 +29,12 @@
                     require __DIR__ . '/components/adminComponents/pedidos.php';
                     break;
                 default:
-                    echo '<script>
+                    echo '
+                    <script>
                                     if (!(window.location.pathname === "' . $basePath . '/admin" && window.location.search === "?type=adicionar")) {
                                         window.location.href = "' . $basePath . '/admin?type=adicionar";
                                     }
-                                </script>';
+                    </script>';
                     break;
 
             }
