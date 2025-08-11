@@ -44,10 +44,10 @@ $products = json_decode($dadosJson, true);
                     <label for="category">Categoria:</label>
                     <select id="category" name="category" required>
                         <option>Selecione uma categoria</option>
-                        <option value="DESTAQUES">DESTAQUES</option>
+                        <option value="DESTAQUE">DESTAQUE</option>
                         <option value="BEBIDAS">BEBIDAS</option>
                         <option value="SALGADOS">SALGADOS</option>
-                        <option value="DOCES">DOCES</option>
+                        <option value="DOCE">DOCE</option>
                         <option value="JARDIMFELINO">JARDIM FELINO</option>
                     </select>
                 </div>

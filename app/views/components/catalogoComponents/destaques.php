@@ -2,7 +2,7 @@
 <?php
 $basePath = str_replace('/index.php', '', $scriptName);
 
-$url = "http://localhost" . $basePath . "/api/products/getAll?category=DESTAQUES&limit=6";
+$url = "http://localhost" . $basePath . "/api/products/getAll?category=DESTAQUE&limit=6";
 
 $dadosJson = file_get_contents($url);
 $products = json_decode($dadosJson, true);
