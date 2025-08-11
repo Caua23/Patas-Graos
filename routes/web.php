@@ -83,6 +83,10 @@ switch ($route) {
         require __DIR__ . '/../app/controllers/LoginController.php';
         break;
 
+    case '/cadastro':
+        require __DIR__ . '/../app/controllers/CadastroController.php';
+        break;
+
     case '/admin':
         require __DIR__ . '/../app/controllers/AdminController.php';
         break;
