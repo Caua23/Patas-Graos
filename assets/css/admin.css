@@ -13,6 +13,39 @@ body {
   height: 100%;
 }
 
+.card .pedido-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #000;
+}
+.card .pedido-content .table-products {
+  width: 100%;
+  height: 50%;
+}
+.card .pedido-content table {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.card .pedido-content th {
+  font-size: 15pt;
+  border: none;
+}
+
+.card .pedido-content td {
+  border: none;
+}
+
+.card .pedido-content .total {
+  margin-left: 5%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+
 aside {
   position: fixed;
   display: flex;
@@ -153,7 +186,7 @@ picture button svg {
   height: 150px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .card .content div:first-child {
   display: flex;
@@ -418,3 +451,4 @@ picture button svg {
   appearance: none;
   cursor: pointer;
 }
+
