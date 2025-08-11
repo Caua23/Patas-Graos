@@ -1,8 +1,16 @@
 <?php
 $basePath = str_replace('/index.php', '', $scriptName);
 
-$url = "http://localhost" . $basePath . "/api/products/getAll";
+$url = "http://localhost" . $basePath . "/api/products/getAll?category=JARDIMFELINO";
 
 $dadosJson = file_get_contents($url);
-$produtos = json_decode($dadosJson, true);
+$products = json_decode($dadosJson, true);
 ?>
+<div class="demo">
+    <?php
+    
+    foreach ($products as $product) {
+        require __DIR__ . '/card.php';
+    }
+    ?>
+</div>

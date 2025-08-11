@@ -17,11 +17,12 @@ async function deleteProduct(id) {
 
     const result = await response.json();
     if (response.ok) {
-        location.reload();
+         location.reload();
     } else {
         alert(`Error: ${result.error}`);
     }
 }
+
 
 async function updateProduct(id, data) {
     const response = await fetch(`http://localhost/${projectName}/api/products/update/${id}`, {
@@ -37,6 +38,7 @@ async function updateProduct(id, data) {
         alert(`Error: ${result.error}`);
     }
 }
+
 
 async function createProduct(data) {
     const response = await fetch(`http://localhost/${projectName}/api/products/create`, {
@@ -65,9 +67,6 @@ function getCookie(name) {
     return null;
 }
 
-
-
-
 function showProduct() {
     const form = document.querySelector(".addProduct-form");
     if (form) form.classList.remove("hidden");
@@ -89,6 +88,7 @@ function hiddenUpdateProduct() {
 function showUpdateProduct(id) {
     const form = document.querySelector(".product-form");
     if (!form) return;
+    
     form.setAttribute("data-product-id", id);
     form.classList.remove("hidden");
 }
@@ -96,7 +96,7 @@ function showUpdateProduct(id) {
 document.addEventListener("DOMContentLoaded", () => {
     const addForm = document.querySelector(".addProduct-form");
     const idAdmin = getCookie("id")
-    if (addForm || idAdmin) {
+    if (addForm && idAdmin) {
         addForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             const formData = new FormData(addForm);

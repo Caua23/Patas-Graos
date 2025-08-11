@@ -3,10 +3,14 @@ $basePath = str_replace('/index.php', '', $scriptName);
 
 $url = "http://localhost" . $basePath . "/api/products/getAll";
 
+
 $dadosJson = file_get_contents($url);
 $products = json_decode($dadosJson, true);
 
+
 ?>
+
+
 <style>
     .demo {
         background-image: url("<?php echo $basePath; ?>/assets/img/fundo.jpg");
@@ -29,27 +33,33 @@ $products = json_decode($dadosJson, true);
 
                 <div class="form-group">
                     <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" >
+                    <input type="text" id="name" name="name">
                 </div>
 
                 <div class="form-group">
                     <label for="price">Preço (R$):</label>
-                    <input type="number" step="0.01" min="0" id="price" name="price" >
+                    <input type="number" step="0.01" min="0" id="price" name="price">
                 </div>
 
                 <div class="form-group">
                     <label for="category">Categoria:</label>
-                    <input type="text" id="category" name="category" >
+                    <select id="category" name="category" required>
+                        <option value="DESTAQUES">DESTAQUES</option>
+                        <option value="BEBIDAS">BEBIDAS</option>
+                        <option value="SALGADOS">SALGADOS</option>
+                        <option value="DOCES">DOCES</option>
+                        <option value="JARDIMFELINO">JARDIM FELINO</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="amount">Quantidade:</label>
-                    <input type="number" min="0" id="amount" name="amount" >
+                    <input type="number" min="0" id="amount" name="amount">
                 </div>
 
                 <div class="form-group full-width">
                     <label for="description">Descrição:</label>
-                    <textarea id="description" name="description" ></textarea>
+                    <textarea id="description" name="description"></textarea>
                 </div>
 
                 <div class="form-group full-width">
