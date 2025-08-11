@@ -12,8 +12,8 @@ $products = json_decode($dadosJson, true);
 
 
 <style>
-    .demo {
-        background-image: url("<?php echo $basePath; ?>/assets/img/fundo.jpg");
+    body {
+        background-color: #f5f5f5;
     }
 </style>
 <div class="demo">
@@ -44,6 +44,7 @@ $products = json_decode($dadosJson, true);
                 <div class="form-group">
                     <label for="category">Categoria:</label>
                     <select id="category" name="category" required>
+                        <option>Selecione uma categoria</option>
                         <option value="DESTAQUES">DESTAQUES</option>
                         <option value="BEBIDAS">BEBIDAS</option>
                         <option value="SALGADOS">SALGADOS</option>
@@ -53,8 +54,8 @@ $products = json_decode($dadosJson, true);
                 </div>
 
                 <div class="form-group">
-                    <label for="amount">Quantidade:</label>
-                    <input type="number" min="0" id="amount" name="amount">
+                    <label for="amount">Quantidade/Fatia/ML/KG:</label>
+                    <input type="text" id="amount" name="amount">
                 </div>
 
                 <div class="form-group full-width">

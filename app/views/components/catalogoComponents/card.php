@@ -19,9 +19,9 @@
         </div>
         <div class="description">
             <p><?= $product['description']; ?></p>
-            <span><?= $product['amount']; ?> ML/Kg</span>
+            <span><?= $product['amount']; ?></span>
         </div>
-        <div class="actions">
+        <div class="actions" onclick="comprar( <?= $product['id']; ?> )">
             <button class="add-to-cart">Adicionar ao Carrinho</button>
         </div>
     </div>

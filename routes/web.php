@@ -107,38 +107,48 @@ switch ($route) {
 
         echo $ProductController->getAllProducts($limit, $category);
         break;
+        
     case '/api/products/create':
         require_once __DIR__ . '/../app/controllers/ProductController.php';
-        $ProductController = new ProdutoController();
-        $input = getRequestData();
-        echo $ProductController->createProduct(
-            $input['name'] ?? '',
-            $input['description'] ?? '',
-            (float) ($input['price'] ?? 0),
-            $input['img'] ?? '',
-            $input['category'] ?? '',
-            $input['amount'] ?? '',
-            (int) ($input['idAdmin'] ?? 0),
+        $productController = new ProdutoController();
 
+        $input = getRequestData();
+        echo $productController->createProduct(
+            $input['name'],
+            $input['description'],
+            (float) $input['price'],
+            $input['img'],
+            $input['category'],
+            $input['amount'],
+            (int) $input['id_adm']
         );
+
         break;
+
+    case '/api/carrinho/checkout':
+        require_once __DIR__ . '/../app/controllers/CartController.php';
+        $cartController = new CartController();
+        $input = getRequestData();
+
+        $paymentMethod = $input['payment'] ?? 'dinheiro';
+        $tableNumber = random_int(1, 10);
+
+        echo $cartController->checkout($paymentMethod, $tableNumber);
+        break;
+
     case '/api/carrinho/add':
         require_once __DIR__ . '/../app/controllers/CartController.php';
         $cartController = new CartController();
         $input = getRequestData();
-        echo $cartController->addProduct(
-            [
-                'idProduto' => (int) ($input['idProduto'] ?? 0),
-                'quantidade' => (int) ($input['quantidade'] ?? 0)
-            ]
-        );
+        if (isset($input['idProduto'], $input['quantidade'])) {
+            $input = [$input]; 
+        }
+        echo $cartController->addProduct($input);
         break;
     case '/api/carrinho/get':
         require_once __DIR__ . '/../app/controllers/CartController.php';
         $cartController = new CartController();
-        echo $cartController->getProductsFromCart(
-            1
-        );
+        echo $cartController->getProductsFromCart();
 
         break;
     default:

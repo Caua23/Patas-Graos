@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 price: parseFloat(formData.get("price")) || 0,
                 img: formData.get("img"),
                 category: formData.get("category"),
-                amount: parseInt(formData.get("amount")) || 0,
+                amount: formData.get("amount"),
                 idAdmin: idAdmin
             };
             await createProduct(data);
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 price: parseFloat(formData.get("price")) || 0,
                 img: formData.get("img"),
                 category: formData.get("category"),
-                amount: parseInt(formData.get("amount")) || 0
+                amount: formData.get("amount")
             };
             await updateProduct(productId, data);
         });
