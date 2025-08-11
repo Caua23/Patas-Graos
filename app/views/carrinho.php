@@ -60,15 +60,14 @@ $total = array_sum(array_map(fn($item) => $item['quantidade'] * $item['produto']
 
         <section aria-label="Método de pagamento" class="pagamento">
             <h2>Escolha o método de pagamento</h2>
-            <form method="POST">
+            <form id="form">
                 <fieldset>
                     <legend>Método de pagamento</legend>
 
                     <div class="payment-method">
                         <label for="pagamento-pix">
-                            <input type="radio" name="metodo_pagamento" id="pagamento-pix" value="pix" required />
+                            <input type="radio" name="payment" id="pagamento-pix" value="pix" required />
                             <div>
-                                <img src="" alt="">
                                 Pix
                             </div>
                         </label>
@@ -76,9 +75,9 @@ $total = array_sum(array_map(fn($item) => $item['quantidade'] * $item['produto']
 
                     <div class="payment-method">
                         <label for="pagamento-cartao">
-                            <input type="radio" name="metodo_pagamento" id="pagamento-cartao" value="cartao" />
+                            <input type="radio" name="payment" id="pagamento-cartao" value="cartao" />
                             <div>
-                                <img src="" alt="">
+                                
                                 Cartão
                             </div>
                         </label>
@@ -86,9 +85,9 @@ $total = array_sum(array_map(fn($item) => $item['quantidade'] * $item['produto']
 
                     <div class="payment-method">
                         <label for="pagamento-dinheiro">
-                            <input type="radio" name="metodo_pagamento" id="pagamento-dinheiro" value="dinheiro" />
+                            <input type="radio" name="payment" id="pagamento-dinheiro" value="dinheiro" />
                             <div>
-                                <img src="" alt="">
+                                
                                 Dinheiro
                             </div>
                         </label>

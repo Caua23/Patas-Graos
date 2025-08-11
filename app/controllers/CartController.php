@@ -44,67 +44,77 @@ class CartController
         return json_encode($result);
     }
     public function checkout(string $paymentMethod, int $tableNumber = null)
-    {
-        try {
-            $this->db->beginTransaction();
+{
+    try {
+        $this->db->beginTransaction();
 
-            // Pega carrinho único
-            $stmt = $this->db->query("SELECT id FROM carrinho LIMIT 1");
-            $carrinho = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $this->db->query("SELECT id FROM carrinho LIMIT 1");
+        $carrinho = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if (!$carrinho) {
-                throw new Exception("Carrinho vazio");
-            }
-            $carrinho_id = $carrinho['id'];
-
-            // Pega produtos do carrinho
-            $produtos = json_decode($this->getProductsFromCart(), true);
-            if (empty($produtos)) {
-                throw new Exception("Carrinho está vazio");
-            }
-
-            // Cria o pedido (status pode ser 'pendente' por exemplo)
-            $insertPedido = $this->db->prepare("INSERT INTO pedido (amount, payment, status, table_number) VALUES (:amount, :payment, :status, :table_number)");
-
-            // soma total
-            $totalAmount = 0;
-            foreach ($produtos as $p) {
-                $totalAmount += $p['price'] * $p['amount'];
-            }
-
-            $insertPedido->execute([
-                ':amount' => $totalAmount,
-                ':payment' => $paymentMethod,
-                ':status' => 'pendente',
-                ':table_number' => $tableNumber
-            ]);
-            $pedido_id = $this->db->lastInsertId();
-
-            // Insere os produtos no pedido_produto
-            $insertPedidoProduto = $this->db->prepare("INSERT INTO pedido_produto (id_produtos, amount, fk_pedido_id) VALUES (:id_produto, :amount, :pedido_id)");
-
-            foreach ($produtos as $p) {
-                $insertPedidoProduto->execute([
-                    ':id_produto' => $p['id'],
-                    ':amount' => $p['amount'],
-                    ':pedido_id' => $pedido_id
-                ]);
-            }
-
-            
-            $deleteCarrinhoProdutos = $this->db->prepare("DELETE FROM carrinho_produtos WHERE fk_carrinho_id = :carrinho_id");
-            $deleteCarrinhoProdutos->execute([':carrinho_id' => $carrinho_id]);
-
-            $this->db->commit();
-
-            return json_encode(['success' => true, 'pedido_id' => $pedido_id]);
-
-        } catch (\Throwable $e) {
-            $this->db->rollBack();
-            http_response_code(500);
-            return json_encode(['error' => 'Erro ao finalizar pedido', 'message' => $e->getMessage()]);
+        if (!$carrinho) {
+            throw new Exception("Carrinho vazio");
         }
+        $carrinho_id = $carrinho['id'];
+
+        $produtos = json_decode($this->getProductsFromCart(), true);
+        if (empty($produtos)) {
+            throw new Exception("Carrinho está vazio");
+        }
+
+        $insertPedido = $this->db->prepare("
+            INSERT INTO pedido (payment, status, table_number)
+            VALUES (:payment, :status, :table_number)
+        ");
+
+        $insertPedido->execute([
+            ':payment' => $paymentMethod,
+            ':status' => 'pendente',
+            ':table_number' => $tableNumber
+        ]);
+
+        $pedido_id = $this->db->lastInsertId();
+
+        $insertPedidoProduto = $this->db->prepare("
+            INSERT INTO pedido_produto (id_produtos, amount, fk_pedido_id)
+            VALUES (:id_produto, :amount, :pedido_id)
+        ");
+        $total = 0;
+        foreach ($produtos as $p) {
+            $total =+ $p['produto']['price'] * $p['quantidade'];
+            $insertPedidoProduto->execute([
+                ':id_produto' => $p['produto']['id'],
+                ':amount' => $p['quantidade'],
+                ':pedido_id' => $pedido_id
+            ]);
+        }
+
+        
+        $deleteCarrinhoProdutos = $this->db->prepare("DELETE FROM carrinho_produtos WHERE fk_carrinho_id = :carrinho_id");
+        $deleteCarrinhoProdutos->execute([':carrinho_id' => $carrinho_id]);
+
+        $this->db->commit();
+
+        $redirect = $paymentMethod == 'dinheiro' ? '/pago' : '/api/qrcode/';
+
+        http_response_code(200);
+        
+        return json_encode([
+            'success' => true,
+            'pedido_id' => $pedido_id,
+            'redirect' => $redirect,
+            'total' => $total
+        ]);
+
+    } catch (\Throwable $e) {
+        $this->db->rollBack();
+        http_response_code(500);
+        return json_encode([
+            'error' => 'Erro ao finalizar pedido',
+            'message' => $e->getMessage()
+        ]);
     }
+}
+
 
     public function addProduct(array $listOfProducts)
     {
