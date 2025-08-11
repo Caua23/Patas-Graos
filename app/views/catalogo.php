@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -8,6 +9,68 @@
     <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/css/catalogo.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="<?php echo $basePath; ?>/assets/css/header.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="<?php echo $basePath; ?>/assets/img/logo.jpeg" type="image/x-icon">
+    <style>
+    .card {
+        overflow: hidden;
+        margin: 16px;
+        width: 350px;
+        height: 400px;
+        text-align: center;
+        background-color:#341d08;
+        color: white;
+        font: 600 14px 'Arial', sans-serf;
+        user-select: none;
+    }
+
+    .card img {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 10px;
+        object-fit: cover;
+
+    }
+
+    .card .content {
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+    }
+    .card .content div:first-child {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+        justify-content: center;
+        align-items: center;    
+    }
+    .card .content .description {
+        margin-left: 20px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: start;
+        align-items: start;
+    }
+    .card .content .description p{
+        max-width: 200px;
+        text-align: justify;
+    }
+    .add-to-cart{
+        background-color: rgba(0, 0, 0, 1);
+        color: white;
+        border: none;
+        border-radius: 0px;
+        padding: 20px 25px;
+        cursor: pointer;
+        font: 500 14px 'Arial', sans-serif;
+    }
+
+
+
+    
+</style>    
 </head>
 
 <body>

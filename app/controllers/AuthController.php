@@ -10,7 +10,7 @@ class AuthController
         $this->db = (new Database())->getConnection();
     }
 
-    function createUser(string $name, string $email, string $password, string $role): string
+    function createUser(string $name, string $email, string $phone, string $password, string $role): string
     {
         header('Content-Type: application/json');
 
@@ -18,18 +18,20 @@ class AuthController
             return json_encode(['error' => 'Método inválido']);
         }
 
-        if (empty($name) || empty($email) || empty($password) || empty($role)) {
+        if (empty($name) || empty($email) || empty($phone) || empty($password) || empty($role)) {
+            http_response_code(400);
             return json_encode(['error' => 'Preencha todos os campos.']);
         }
 
-        $stmt = $this->db->prepare("INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, :role)");
+        $stmt = $this->db->prepare("INSERT INTO admin (name, email, phone, password, role) VALUES (:name, :email, :phone, :password, :role)");
         $stmt->execute([
             'name' => $name,
             'email' => $email,
+            'phone' => $phone,
             'password' => password_hash($password, PASSWORD_DEFAULT),
             'role' => $role
         ]);
-
+        http_response_code(201);
         return json_encode(
             [
                 'success' => 'Usuário criado com sucesso.',
@@ -54,24 +56,30 @@ class AuthController
 
 
 
-        if (empty($email) || empty($password))
+        if (empty($email) || empty($password)){
+            http_response_code(400);
             return json_encode(['error' => 'Preencha todos os campos.']);
+        }
 
-
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM admin WHERE email = :email LIMIT 1");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user)
+        if (!$user){
+            http_response_code(400);
             return json_encode(['error' => 'Usuário não encontrado.']);
-        if (!password_verify($password, $user['password']))
+        }
+        if (!password_verify($password, $user['password'])){
+            http_response_code(403);
             return json_encode(['error' => 'Senha incorreta.']);
+        }
 
         return json_encode(
             [
                 'success' => 'Login bem-sucedido.',
                 'code' => 200,
                 'token' => 'logado',
+                'redirect' => '/admin',
                 'user' => [
                     'id' => $user['id'],
                     'name' => $user['name'],
