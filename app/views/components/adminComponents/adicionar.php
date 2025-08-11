@@ -30,17 +30,18 @@
             <div class="form-group">
                 <label for="category">Categoria:</label>
                 <select id="category" name="category" required>
-                    <option value="DESTAQUES">DESTAQUES</option>
+                    <option>Selecione uma categoria</option>
+                    <option value="DESTAQUE">DESTAQUE</option>
                     <option value="BEBIDAS">BEBIDAS</option>
                     <option value="SALGADOS">SALGADOS</option>
-                    <option value="DOCES">DOCES</option>
+                    <option value="DOCE">DOCE</option>
                     <option value="JARDIMFELINO">JARDIM FELINO</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="amount">Quantidade:</label>
-                <input type="number" min="0" id="amount" name="amount" required>
+                <label for="amount">Quantidade/Fatia/ML/KG:</label>
+                <input type="text" id="amount" name="amount">
             </div>
 
             <div class="form-group full-width">

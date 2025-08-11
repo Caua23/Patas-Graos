@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 img: formData.get("img"),
                 category: formData.get("category"),
                 amount: formData.get("amount"),
-                idAdmin: idAdmin
+                id_adm: idAdmin
             };
             await createProduct(data);
         });
