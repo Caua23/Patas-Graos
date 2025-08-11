@@ -51,13 +51,13 @@ if (preg_match('#^/api/products/update/(\d+)$#', $route, $matches) && $_SERVER['
     echo $ProductController->updateProduct($id, $input);
     exit;
 }
-if(preg_match('#^/api/qrcode/(\d+)$#', $route, $matches) && $_SERVER['REQUEST_METHOD'] === 'GET'){
+if (preg_match('#^/api/qrcode/(\d+)$#', $route, $matches) && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $value = (int) $matches[1];
     echo "
     <div style='user-select: none; display: flex; flex-direction: column; justify-content: center; align-items: center;'>
         <h1 style='font-family: monospace;'> Pagar </h1>
         <img src='https://codigosdebarrasbrasil.com.br/wp-content/uploads/2019/09/codigo_qr-300x300.png' />
-        <button style='margin-top: 40px; border: none; border-radius: 15px; cursor: pointer; background-color: #007427ff; color: #fff; padding: 10px 20px;' onclick='window.location.href = `".$basePath."/pago` '>Pagar</button>
+        <button style='margin-top: 40px; border: none; border-radius: 15px; cursor: pointer; background-color: #007427ff; color: #fff; padding: 10px 20px;' onclick='window.location.href = `" . $basePath . "/pago` '>Pagar</button>
     </div>
     ";
     exit;
@@ -150,7 +150,7 @@ switch ($route) {
         $cartController = new CartController();
         $input = getRequestData();
         if (isset($input['idProduto'], $input['quantidade'])) {
-            $input = [$input]; 
+            $input = [$input];
         }
         echo $cartController->addProduct($input);
         break;
@@ -159,6 +159,11 @@ switch ($route) {
         $cartController = new CartController();
         echo $cartController->getProductsFromCart();
 
+        break;
+    case '/api/pedidos/get':
+        require_once __DIR__ . '/../app/controllers/PedidosController.php';
+        $pedidoController = new PedidosController();
+        echo $pedidoController->getPedidos();
         break;
     default:
         http_response_code(404);
